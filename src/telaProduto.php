@@ -154,8 +154,8 @@ source: availableTags
                 </svg>
                 <div class="menu">
                     <ul>
-                        <li><a>Início</a></li>
-                        <li><a>Contato</a></li>
+                        <li><a href="../">Início</a></li>
+                        <li href="./contato.php"><a>Contato</a></li>
                         <li><a style="cursor: pointer !important;" onclick="busca('caderno')">Cadernos</a></li>
                         <li><a style="cursor: pointer !important;" onclick="busca('estojo')">Estojos</a></li>
                         <li><a style="cursor: pointer !important;" onclick="busca('caneta')">Canetas</a></li>

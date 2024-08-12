@@ -140,7 +140,6 @@ source: availableTags
                     </svg>
                 </button>
             </form>
-
         </div>
 
         <div class="cadastro">
@@ -192,7 +191,7 @@ source: availableTags
                 <div class="menu">
                     <ul>
                         <li><a>Início</a></li>
-                        <li><a>Contato</a></li>
+                        <li><a href="./src/contato.php">Contato</a></li>
                         <li><a onclick="busca('caderno')">Cadernos</a></li>
                         <li><a onclick="busca('estojo')">Estojos</a></li>
                         <li><a onclick="busca('caneta')">Canetas</a></li>

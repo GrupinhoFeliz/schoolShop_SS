@@ -1,24 +1,58 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/pesquisaProd.css">
-    <link rel="stylesheet" href="../css/footer.css">
+    <title>School Shop</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/carousel/">
+    <link rel="icon" href="../imgs/logo_sacola.png">
     <link rel="stylesheet" href="../assets/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/contato.css">
     <link rel="stylesheet" href="../css/bootstrap/carousel.rtl.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/bootstrap/carousel.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
 </head>
 
-<body style="padding: 0; margin: 0">  
+<body style="margin: 0; padding: 0;">
+    <?php
+    include ("../src/conn.php");
 
+    $sql = $conn->query("SELECT produtos FROM todosprodutos");
+    $produtos = [];
+    $i = 0;
+    print "<script>
+            $( function() {
+var availableTags = [
+           ";
+                if ($sql) {
+                    if ($sql->num_rows > 0) {
+                        while ($row = $sql->fetch_assoc()) {
+
+                        $produtos[$i] = $row['produtos'];
+                        print "'$produtos[$i]',";
+                        $i++;
+                        }
+                    }
+                }
+    print " ''
+];
+            $( '#pesquisa' ).autocomplete({
+source: availableTags
+});
+} );
+
+$('textarea').autoResize();
+</script>
+";
+
+    ?>
     <header class="mb-3">
         <div onclick="window.location.href='../'" class="logo" style="z-index: 100">
             <img src="../imgs/logo_remasterizada__2_-removebg-preview.png">
@@ -93,62 +127,33 @@ session_start();
             </div>
         </div>
     </header>
+<main style="margin-top: 100px">
+<div class="titulo">
+    <h1 class="ctt_titulo">Contato</h1>
+</div>
+
+<div class="form">
+    <p class="msg_preencha">Preencha o formulário para contato</p>
+    <form class="formulario" action="#" method="get">
+        <div class="nome_email">
+            <input type="text" placeholder="Seu nome">
+            <input type="email" placeholder="Seu email">
+        </div>
+        <div class="msg">
+            <textarea name="" id="" cols="30" rows="8" placeholder="Sua mensagem"></textarea>
+        </div>
+        <div class="btn">
+            <button>Enviar mensagem</button>
+        </div>
+    </form>
+</div>
+</main>
 
 
-    <main style="background-color: rgba(150,150,150,0.5); padding-top: 10%; padding-left: 5%">
-        <?php
-        include_once ('./conn.php');
-        if(count($_GET) > 0){
-            @$pesquisaProd_click = htmlspecialchars($_GET['pesquisaProd']);
-        
-            $script = "SELECT * FROM todosprodutos WHERE produtos LIKE '%$pesquisaProd_click%'";            
-
-            $query = $conn->query($script);
-            if ($query) {
-                if ($query->num_rows > 0) {
-                    // Exibir os resultados encontrados
-                    print "<div class='row'>";
-                    while ($row = $query->fetch_assoc()) {
-
-                        print "<div class='prod' onClick='detalhe(" . $row['id'] . ")'>";
-                        print "<div class='imgProd'>";
-                        print "<img src=''>";
-                        print "</div>";
-                        print "<div class='descProd'>";
-                        print "<p>" . $row['produtos'] . "</p>";
-                        print "</div>";
-                        print "</div>";
-                    }
-                    print "</div>";
-                } else {
-                    echo  "<style>
-                    main{
-                        height: fit-content;
-                        padding-bottom: 40px;
-                        margin: 0;
-                    }</style>";
-                    echo "<p class='h-100 text-danger font-weight-bold'>Nenhum resultado encontrado.</p>";
-
-                }
-            } else {
-                echo "Erro na consulta: " . $conn->error; // Exibe mensagem de erro se a consulta falhar
-            }
-        }else{
-            echo  "<style>
-                    main{
-                        height: fit-content;
-                        padding-bottom: 40px;
-                        margin: 0;
-                    }</style>";
-            print "<b>Nenhum valor enviado!</b>";
-        }
-        ?>
-
-    </main>
-    <footer>
+<footer style="margin-top: 80px">
         <div class="conteudo1">
             <div class="atendimento">
-                <p >
+                <p>
                     CONSTEM ARTIGOS ESPORTIVOS
                 </p>
                 <h2>
@@ -219,15 +224,9 @@ session_start();
     </footer>
 
     <script>
-        function detalhe(n) {
-            window.location.replace("./telaProduto.php?id=" + n)
-        }
-    </script>
-    <script>
         function busca(n) {
             window.location.replace("./produtos.php?pesquisaProd=" + n)
         }
-</script>
+    </script>
 </body>
-
 </html>

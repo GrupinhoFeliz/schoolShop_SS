@@ -36,22 +36,23 @@ CREATE TABLE `todosprodutos` (
   `img3` text NOT NULL,
   `img4` text NOT NULL,
   `img5` text NOT NULL,
-  `descricao` text NOT NULL
+  `descricao` text NOT NULL,
+  `desconto` decimal(9,2) not null 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `todosprodutos`
 --
 
-INSERT INTO `todosprodutos` (`id`, `produtos`, `quantidade`, `valor`, `img1`, `img2`, `img3`, `img4`, `img5`, `descricao`) VALUES
-(1, 'Camiseta nike', 10, 13.00, '0', '0', '0', '0', '0', ''),
-(2, 'Camiseta Adidas', 10, 13.00, '0', '0', '0', '0', '0', ''),
-(3, 'Camiseta abiaos', 10, 13.00, '0', '0', '0', '0', '0', ''),
-(4, 'Camiseta Legal', 10, 13.00, '0', '0', '0', '0', '0', ''),
-(5, 'Camiseta Divertida', 10, 13.00, '0', '0', '0', '0', '0', ''),
-(6, 'Camiseta Legal e bonita', 10, 13.00, '0', '0', '0', '0', '0', ''),
-(7, 'Blusa de frio', 7, 212.99, 'blusa_de_frio.webp', 'blusa_de_frio_adidas.webp', 'blusa_de_frio_lacoste.webp', 'blusa_de_frio_oakley.webp', 'blusa_de_frio_quick.webp', 'Blusa de frio muito boa'),
-(8, 'Mouse Gamer Profissional do Paulo Muzy', 45, 799999.99, 'mouseLegal.jpg', 'oisajdlkmfdoijdlk.jpg', 'dsaodsadsoijda.jpg', 'mouseGamerReDragon.avif', 'mouseGamer.jpg', 'Mouse Gamer BOM BARATO');
+INSERT INTO `todosprodutos` (`id`, `produtos`, `quantidade`, `valor`, `img1`, `img2`, `img3`, `img4`, `img5`, `descricao`, 'desconto') VALUES
+(1, 'Camiseta nike', 10, 13.00, '0', '0', '0', '0', '0', '', 0),
+(2, 'Camiseta Adidas', 10, 13.00, '0', '0', '0', '0', '0', '', 0),
+(3, 'Camiseta abiaos', 10, 13.00, '0', '0', '0', '0', '0', '',0),
+(4, 'Camiseta Legal', 10, 13.00, '0', '0', '0', '0', '0', '',0),
+(5, 'Camiseta Divertida', 10, 13.00, '0', '0', '0', '0', '0', '',0),
+(6, 'Camiseta Legal e bonita', 10, 13.00, '0', '0', '0', '0', '0', '',0),
+(7, 'Blusa de frio', 7, 212.99, 'blusa_de_frio.webp', 'blusa_de_frio_adidas.webp', 'blusa_de_frio_lacoste.webp', 'blusa_de_frio_oakley.webp', 'blusa_de_frio_quick.webp', 'Blusa de frio muito boa', 12.2),
+(8, 'Mouse Gamer Profissional do Paulo Muzy', 45, 799999.99, 'mouseLegal.jpg', 'oisajdlkmfdoijdlk.jpg', 'dsaodsadsoijda.jpg', 'mouseGamerReDragon.avif', 'mouseGamer.jpg', 'Mouse Gamer BOM BARATO', 10);
 
 --
 -- Índices para tabelas despejadas

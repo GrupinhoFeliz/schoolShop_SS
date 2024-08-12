@@ -133,6 +133,7 @@ header .rastreiotxt {
 }
 header a{
   text-decoration: none !important;
+  cursor: pointer !important;
 }
 
 header .rastreiotxt p {
@@ -228,8 +229,14 @@ header .menu a {
   padding: 10px 20px;
   color: #4a4949;
   text-decoration: none;
+  cursor: pointer !important;
 }
 
 header .menu a:hover {
   color: #918c8c;
 }
+
+/* .ui-menu-item-wrapper{
+  background-color: red;
+  border: 1px solid red;
+} */

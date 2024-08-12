@@ -18,7 +18,6 @@ include("./conn.php");
     $sql = $conn->query($sql);
     if($sql->num_rows > 0){
         print "Achou";
-       
     }
 
 

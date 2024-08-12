@@ -20,12 +20,12 @@ session_start();
 <body style="padding: 0; margin: 0">  
 
     <header class="mb-3">
-        <div class="logo" style="z-index: 100">
+        <div onclick="window.location.href='../'" class="logo" style="z-index: 100">
             <img src="../imgs/logo_remasterizada__2_-removebg-preview.png">
         </div>
 
         <div class="procura">
-            <form method="post" action="#">
+            <form method="get" action="./produtos.php">
                 <input placeholder="O que está buscando?" type="text" name="pesquisaProd">
                 <button type="submit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -81,18 +81,13 @@ session_start();
                 </svg>
                 <div class="menu">
                     <ul>
-                        <?php
-                            $abas[0] = "Início";
-                            $abas[1] = "Contato";
-                            $abas[2] = "Cadernos";
-                            $abas[3] = "Estojos";
-                            $abas[4] = "Canetas";
-                            $abas[5] = "Lapiseiras";
-                            $abas[6] = "Lápis";        
-                            for ($i=0; $i < 7; $i++) { 
-                                print "<li><a href='#'>" . $abas[$i] . "</a></li>";
-                            }
-                        ?>
+                        <li><a>Início</a></li>
+                        <li><a>Contato</a></li>
+                        <li><a style="cursor: pointer !important;" onclick="busca('caderno')">Cadernos</a></li>
+                        <li><a style="cursor: pointer !important;" onclick="busca('estojo')">Estojos</a></li>
+                        <li><a style="cursor: pointer !important;" onclick="busca('caneta')">Canetas</a></li>
+                        <li><a style="cursor: pointer !important;" onclick="busca('lapiseira')">Lápiseiras</a></li>
+                        <li><a style="cursor: pointer !important;" onclick="busca('lapis')">Lápis</a></li>
                     </ul>
                 </div>
             </div>
@@ -103,9 +98,11 @@ session_start();
     <main style="background-color: rgba(150,150,150,0.5); padding-top: 10%; padding-left: 5%">
         <?php
         include_once ('./conn.php');
-        if (count($_POST) > 0) {
-            $pesquisaProd = $_POST['pesquisaProd'];
-            $script = "SELECT * FROM todosprodutos WHERE produtos LIKE '%$pesquisaProd%'";
+        if(count($_GET) > 0){
+            @$pesquisaProd_click = htmlspecialchars($_GET['pesquisaProd']);
+        
+            $script = "SELECT * FROM todosprodutos WHERE produtos LIKE '%$pesquisaProd_click%'";            
+
             $query = $conn->query($script);
             if ($query) {
                 if ($query->num_rows > 0) {
@@ -136,8 +133,15 @@ session_start();
             } else {
                 echo "Erro na consulta: " . $conn->error; // Exibe mensagem de erro se a consulta falhar
             }
+        }else{
+            echo  "<style>
+                    main{
+                        height: fit-content;
+                        padding-bottom: 40px;
+                        margin: 0;
+                    }</style>";
+            print "<b>Nenhum valor enviado!</b>";
         }
-
         ?>
 
     </main>
@@ -219,6 +223,11 @@ session_start();
             window.location.replace("./telaProduto.php?id=" + n)
         }
     </script>
+    <script>
+        function busca(n) {
+            window.location.replace("./produtos.php?pesquisaProd=" + n)
+        }
+</script>
 </body>
 
 </html>

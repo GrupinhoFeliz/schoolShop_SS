@@ -80,6 +80,10 @@
                 <input type="text" name="desc" class="form-control" id="floatingPassword" placeholder="Password">
                 <label for="floatingPassword">Descrição do Produto</label>
             </div>
+            <div class="form-floating p-2 mb-3">
+                <input type="number" step="0.01" name="desconto" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Desconto do Produto</label>
+            </div>
 
             <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
             <p class="mt-5 mb-3 text-muted"></p>
@@ -100,7 +104,7 @@
         $quantidade = $_POST['qtd'];
         $valor = $_POST['valor'];
         $descricao = $_POST['desc'];
-
+        $desconto = $_POST['desconto'];
         $existe = "SELECT * FROM todosprodutos WHERE '$nome'=produtos";
         $testExiste = $conn->query($existe);
         if ($testExiste->num_rows > 0) {
@@ -122,11 +126,10 @@
                         AND move_uploaded_file($_FILES["imagem1"]["tmp_name"], $destino[1])
                         AND move_uploaded_file($_FILES["imagem2"]["tmp_name"], $destino[2])
                         AND move_uploaded_file($_FILES["imagem3"]["tmp_name"], $destino[3])
-                        AND move_uploaded_file($_FILES["imagem4"]["tmp_name"], $destino[4])) {
-                        
-                            echo "Imagens armazenadas";
+                        AND move_uploaded_file($_FILES["imagem4"]["tmp_name"], $destino[4])
+                        ) {
                         // Insere o nome do arquivo no banco de dados
-                        $sql_insert = "INSERT INTO todosprodutos (produtos, quantidade, valor, img1, img2, img3, img4, img5, descricao) VALUES ('$nome', '$quantidade', '$valor','$imagem1', '$imagem2','$imagem3', '$imagem4', '$imagem5', '$descricao')";
+                        $sql_insert = "INSERT INTO todosprodutos (produtos, quantidade, valor, img1, img2, img3, img4, img5, descricao, desconto) VALUES ('$nome', '$quantidade', '$valor','$imagem1', '$imagem2','$imagem3', '$imagem4', '$imagem5', '$descricao', '$desconto')";
                         
                         
                         $inserir_dados = $conn->query($sql_insert);

@@ -33,23 +33,22 @@ $inicio = microtime(true);
     $produtos = [];
     $i = 0;
     print "<script>
-$( function() {
-    var availableTags = [
-        ";
-    if ($sql) {
-        if ($sql->num_rows > 0) {
-            while ($row = $sql->fetch_assoc()) {
-                
-                $produtos[$i] = $row['produtos'];
-                print "'$produtos[$i]',";
-                $i++;
-            }
+            $( function() {
+var availableTags = [
+           ";
+                if ($sql) {
+                    if ($sql->num_rows > 0) {
+                        while ($row = $sql->fetch_assoc()) {
 
-        }
-    }
+                        $produtos[$i] = $row['produtos'];
+                        print "'$produtos[$i]',";
+                        $i++;
+                        }
+                    }
+                }
     print " ''
 ];
-$( '#pesquisa' ).autocomplete({
+            $( '#pesquisa' ).autocomplete({
 source: availableTags
 });
 } );
@@ -127,13 +126,13 @@ source: availableTags
         }
     </style>
     <header>
-        <div class="logo">
+        <div onclick="window.location.href='./'" class="logo">
             <img src="./imgs/logo_remasterizada__2_-removebg-preview.png">
         </div>
 
         <div class="procura">
-            <form method="post" action="./src/produtos.php">
-                <input placeholder="O que está buscando?" id="pesquisa" type="text" name="pesquisaProd">
+            <form method="get" action="./src/produtos.php">
+                <input placeholder="O que está buscando?" autocomplete id="pesquisa" type="text" name="pesquisaProd">
                 <button type="submit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-search" viewBox="0 0 16 16">
@@ -192,18 +191,13 @@ source: availableTags
                 </svg>
                 <div class="menu">
                     <ul>
-                        <?php
-                        $abas[0] = "Início";
-                        $abas[1] = "Contato";
-                        $abas[2] = "Cadernos";
-                        $abas[3] = "Estojos";
-                        $abas[4] = "Canetas";
-                        $abas[5] = "Lapiseiras";
-                        $abas[6] = "Lápis";
-                        for ($i = 0; $i < 7; $i++) {
-                            print "<li><a href='#'>" . $abas[$i] . "</a></li>";
-                        }
-                        ?>
+                        <li><a>Início</a></li>
+                        <li><a>Contato</a></li>
+                        <li><a onclick="busca('caderno')">Cadernos</a></li>
+                        <li><a onclick="busca('estojo')">Estojos</a></li>
+                        <li><a onclick="busca('caneta')">Canetas</a></li>
+                        <li><a onclick="busca('lapiseira')">Lápiseiras</a></li>
+                        <li><a onclick="busca('lapis')">Lápis</a></li>
                     </ul>
                 </div>
             </div>
@@ -429,7 +423,11 @@ source: availableTags
     <script src="./js/header.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
-
+<script>
+        function busca(n) {
+            window.location.replace("./src/produtos.php?pesquisaProd=" + n)
+        }
+</script>
 </body>
 
 </html>

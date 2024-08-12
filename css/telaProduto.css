@@ -336,6 +336,16 @@
     background-color: #0056b3; /* Cor de fundo do botão no hover */
 }
 
+.container{
+    display: table-column;
+    text-align: center;
+}
+
+.estoque {
+    color: #888;
+    font-size: 13px;
+}
+
 
 @media (min-width: 768px) {
     .produto {
